@@ -4,27 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>acceuile montre</title>
+    <title>Liste de souhaits | ChronoID</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
 </head>
 
 <body>
     <header>
-        <a href="acceuille.html" id="logo"><img src="../img/logo.png" alt="logo ChronoID"></a>
-        <h1 id="title">liste de souhait</h1>
+        <a href="acceuille.html" id="logo"><img src="../img/logo.png" alt="Logo ChronoID"></a>
+        <h1 id="title">Liste de souhaits</h1>
         <nav>
-            <a href="liste-montre.html"><img src="../img/liste-montre-blanc.png" alt="liste de montre"><p>liste de montre</p></a>
-            <a href="recherche.montre.html"><img src="../img/recherche-montre-blanc.png" alt="recherche montre"><p>chercheur de montre</p></a>
-        </nav>
-    </header>
-    <main>
+            <a href="liste-souhait.html" aria-current="page"><img src="../img/liste-de-souhait-blanc.png" alt=""><span>Liste de souhaits</span></a>
+            <a href="liste-montre.html"><img src="../img/liste-montre-blanc.png" alt=""><span>Liste de montres</span></a>
+            <a href="recherche-montre.html"><img src="../img/recherche-montre-blanc.png" alt=""><span>Chercheur de montres</span></a>
+        </nav>    </header>
 
+    <main class="page">
+        <div id="souhaits" class="montres-marque"></div>
+        <p id="vide" class="vide" hidden>Votre liste de souhaits est vide. Ajoutez des montres avec le cœur depuis la liste de montres.</p>
     </main>
+
     <footer>
-        &copyChronoID
-        <nav>
-            
-        </nav>
+        <p>&copy; ChronoID</p>
     </footer>
 </body>
 
