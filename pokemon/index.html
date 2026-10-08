@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PokéBinder – Éditions & collection</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>PokéBinder</h1>
+      <nav>
+        <button data-view="sets" class="on">Éditions</button>
+        <button data-view="col">
+          Ma collection <span id="count" class="pill">0</span>
+        </button>
+      </nav>
+      <select id="lang" aria-label="Langue des cartes">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="it">🇮🇹 Italiano</option>
+      </select>
+    </header>
+
+    <main>
+      <!-- Vue 1 : liste des éditions -->
+      <section id="v-sets">
+        <input
+          id="setSearch"
+          type="search"
+          placeholder="Rechercher une édition (ex : Écarlate, Base Set…)"
+        />
+        <p id="setStatus" class="status">Chargement des éditions…</p>
+        <div id="setList"></div>
+      </section>
+
+      <!-- Vue 2 : cartes d'une édition -->
+      <section id="v-cards" hidden>
+        <button id="back" class="ghost">← Toutes les éditions</button>
+        <div class="head">
+          <img id="setLogo" alt="" />
+          <div>
+            <h2 id="setName"></h2>
+            <p id="setMeta"></p>
+          </div>
+        </div>
+        <input
+          id="cardSearch"
+          type="search"
+          placeholder="Filtrer par nom ou numéro"
+        />
+        <p id="cardStatus" class="status"></p>
+        <div id="cardList" class="grid"></div>
+      </section>
+
+      <!-- Vue 3 : ma collection -->
+      <section id="v-col" hidden>
+        <div class="bar">
+          <input
+            id="colSearch"
+            type="search"
+            placeholder="Rechercher dans ma collection"
+          />
+          <button id="addCustom">+ Ajouter une carte</button>
+          <button id="exp" class="ghost">Exporter</button>
+          <label class="btn ghost"
+            >Importer<input id="imp" type="file" accept=".json" hidden
+          /></label>
+        </div>
+        <p id="stats" class="status"></p>
+        <div id="colList" class="grid"></div>
+      </section>
+    </main>
+
+    <!-- Détail d'une carte -->
+    <dialog id="dCard">
+      <form method="dialog">
+        <button class="x" aria-label="Fermer">✕</button>
+      </form>
+      <div class="split">
+        <img id="bigImg" alt="" />
+        <div>
+          <h3 id="bigName"></h3>
+          <p id="bigInfo"></p>
+          <label
+            >État
+            <select id="bigCond">
+              <option>Neuf</option>
+              <option>Quasi neuf</option>
+              <option>Excellent</option>
+              <option>Bon</option>
+              <option>Joué</option>
+              <option>Abîmé</option>
+            </select>
+          </label>
+          <label
+            >Quantité <input id="bigQty" type="number" min="1" value="1"
+          /></label>
+          <label
+            >Prix (€)
+            <input id="bigPrice" type="number" min="0" step="0.01"
+          /></label>
+          <label
+            >Notes <input id="bigNote" placeholder="Holo, gradée PSA 9…"
+          /></label>
+          <button id="bigAdd">Ajouter à ma collection</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Ajout d'une carte perso -->
+    <dialog id="dCustom">
+      <form method="dialog">
+        <button class="x" aria-label="Fermer">✕</button>
+      </form>
+      <h3>Nouvelle carte</h3>
+      <div class="fields">
+        <label class="wide"
+          >Langue de la carte
+          <select id="cLang">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="ja">🇯🇵 日本語</option>
+            <option value="it">🇮🇹 Italiano</option>
+          </select>
+        </label>
+        <label class="wide"
+          >Partir d'une carte existante
+          <input
+            id="cSearch"
+            type="search"
+            placeholder="Nom d'une carte (ex : Pikachu)"
+          />
+        </label>
+        <div id="cResults" class="wide picks"></div>
+        <img id="cPreview" class="wide preview" alt="" hidden />
+        <label>Nom * <input id="cName" /></label>
+        <label>Édition <input id="cSet" /></label>
+        <label>Numéro <input id="cNum" placeholder="12/102" /></label>
+        <label
+          >État
+          <select id="cCond">
+            <option>Neuf</option>
+            <option>Quasi neuf</option>
+            <option>Excellent</option>
+            <option>Bon</option>
+            <option>Joué</option>
+            <option>Abîmé</option>
+          </select>
+        </label>
+        <label
+          >Quantité <input id="cQty" type="number" min="1" value="1"
+        /></label>
+        <label
+          >Prix estimé (€) <input id="cPrice" type="number" min="0" step="0.01"
+        /></label>
+        <label class="wide"
+          >Photo <input id="cImg" type="file" accept="image/*"
+        /></label>
+        <label class="wide"
+          >Notes <input id="cNote" placeholder="Holo, édition 1, gradée PSA 9…"
+        /></label>
+      </div>
+      <button id="cSave">Enregistrer la carte</button>
+    </dialog>
+
+    <footer class="foot">
+      <p>
+        Site créé avec <b>Claude</b>, l’assistant IA d’<a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>.
+      </p>
+      <p>
+        Données et images des cartes : <a href="https://tcgdex.dev" target="_blank" rel="noopener">TCGdex</a>.
+        Prix indicatifs (Cardmarket), sans valeur contractuelle.
+      </p>
+      <p>
+        Pokémon et les noms des cartes sont des marques de Nintendo, Creatures Inc. et GAME FREAK inc.
+        Projet de fan, non officiel.
+      </p>
+      <p>
+      Site créé par <b>MXZ_elyist</b> avec <b>Claude</b>, l’assistant IA d’<a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>.
+      </p>
+    </footer>
+
+    <div id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
