@@ -1,6 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +9,29 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/script.js" defer></script>
 </head>
-
+ 
 <body>
     <header>
-        <a href="acceuille.html" id="logo"><img src="../img/logo.png" alt="Logo ChronoID"></a>
+        <a href="accueil.html" id="logo"><img src="../img/logo.png" alt="Logo ChronoID"></a>
         <h1 id="title">Liste de montres</h1>
-        <nav>
-            <a href="liste-souhait.html"><img src="../img/liste-de-souhait-blanc.png" alt=""><span>Liste de souhaits</span></a>
+        <button type="button" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <nav id="menu">
+            <a href="liste-souhait.html"><img src="../img/liste-de-souhait-blanc.png" alt=""><span>Liste de souhaits</span><b class="badge" id="compteur-coeurs" data-vide="true">0</b></a>
             <a href="liste-montre.html" aria-current="page"><img src="../img/liste-montre-blanc.png" alt=""><span>Liste de montres</span></a>
             <a href="recherche-montre.html"><img src="../img/recherche-montre-blanc.png" alt=""><span>Chercheur de montres</span></a>
-        </nav>    </header>
-
+            <button type="button" id="theme" aria-label="Passer en mode sombre">☾</button>
+        </nav>
+    </header>
+ 
     <main id="list-montre">
         <div id="marques"></div>
         <section id="liste-montre" aria-live="polite"></section>
     </main>
-
+ 
     <footer>
         <p>&copy; ChronoID</p>
     </footer>
 </body>
-
+ 
 </html>
+ 
